@@ -1,0 +1,28 @@
+version: '3.5'
+services:
+  tabby:
+    container_name: tabby
+    image: tabbyml/tabby
+    command: serve --model TabbyML/StarCoder-1B
+    volumes:
+      - ${APP_DATA_DIR}/data:/data
+    restart: unless-stopped
+    ports:
+      - ${APP_PORT}:8080
+    networks:
+      - tipi_main_network
+    labels:
+      # Main
+      traefik.enable: true
+      traefik.http.middlewares.tabby-web-redirect.redirectscheme.scheme: https
+      traefik.http.services.tabby.loadbalancer.server.port: 3001
+      # Web
+      traefik.http.routers.tabby-insecure.rule: Host(`${APP_DOMAIN}`)
+      traefik.http.routers.tabby-insecure.entrypoints: web
+      traefik.http.routers.tabby-insecure.service: tabby
+      traefik.http.routers.tabby-insecure.middlewares: tabby-web-redirect
+      # Websecure
+      traefik.http.routers.tabby.rule: Host(`${APP_DOMAIN}`)
+      traefik.http.routers.tabby.entrypoints: websecure
+      traefik.http.routers.tabby.service: tabby
+      traefik.http.routers.tabby.tls.certresolver: myresolver

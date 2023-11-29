@@ -1,0 +1,16 @@
+{
+  "name": "Tabby",
+  "available": true,
+  "port": 8079,
+  "id": "tabby",
+  "no_gui": true,
+  "exposable": true,
+  "description": "Tabby is a self-hosted AI coding assistant, offering an open-source and on-premises alternative to GitHub Copilot. It boasts several key features:\n\nSelf-contained, with no need for a DBMS or cloud service.\nOpenAPI interface, easy to integrate with existing infrastructure (e.g Cloud IDE).\nSupports consumer-grade GPUs.",
+  "tipi_version": 1,
+  "version": "0.6.0",
+  "categories": ["ai"],
+  "short_desc": "Tabby is a self-hosted AI coding assistant",
+  "author": "TabbyML",
+  "source": "https://github.com/TabbyML/tabby",
+  "form_fields": []
+}
